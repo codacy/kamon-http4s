@@ -36,7 +36,7 @@ def http4sDeps(version: String) = Seq(
 
 lazy val shared = Seq(
   scalaVersion := "2.13.10",
-  crossScalaVersions := Seq("2.12.17", "2.13.10"),
+  
   moduleName := name.value,
   publishTo := sonatypePublishToBundle.value,
   scalacOptions ++= (CrossVersion.partialVersion(scalaVersion.value) match {
@@ -53,6 +53,7 @@ lazy val `kamon-http4s-0_23` = project
   .in(file("modules/0.23"))
   .settings(
     shared,
+    crossScalaVersions := Seq("2.12.17", "2.13.10"),
     name := "kamon-http4s-0.23",
     libraryDependencies ++= http4sDeps("0.23.18")
   )
@@ -61,6 +62,7 @@ lazy val `kamon-http4s-1_0` = project
   .in(file("modules/1.0"))
   .settings(
     shared,
+    crossScalaVersions := Seq("2.13.10"),
     name := "kamon-http4s-1.0",
     libraryDependencies ++= http4sDeps("1.0.0-M38")
   )
