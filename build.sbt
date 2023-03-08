@@ -26,17 +26,11 @@ def compileScope(deps: ModuleID*): Seq[ModuleID]  = deps map (_ % "compile")
 def testScope(deps: ModuleID*): Seq[ModuleID]     = deps map (_ % "test")
 // end copy pasted section
 
-def blazeVersion(http4sVersion: String) =
-  // if(http4sVersion.startsWith("0.23.")) "0.23.13"
-  // else if(http4sVersion.startsWith("1.0.0-M")) "1.0.0-M30"
-  // else 
-    http4sVersion
-
 def http4sDeps(version: String) = Seq(
   "org.http4s" %% "http4s-client"       % version % Provided,
   "org.http4s" %% "http4s-server"       % version % Provided,
-  "org.http4s" %% "http4s-blaze-client" % blazeVersion(version) % Test,
-  "org.http4s" %% "http4s-blaze-server" % blazeVersion(version) % Test,
+  "org.http4s" %% "http4s-ember-client" % version % Test,
+  "org.http4s" %% "http4s-ember-server" % version % Test,
   "org.http4s" %% "http4s-dsl"          % version % Test
 )
 
@@ -60,7 +54,7 @@ lazy val `kamon-http4s-0_23` = project
   .settings(
     shared,
     name := "kamon-http4s-0.23",
-    libraryDependencies ++= http4sDeps("0.23.1")
+    libraryDependencies ++= http4sDeps("0.23.18")
   )
 
 lazy val `kamon-http4s-1_0` = project
@@ -68,7 +62,7 @@ lazy val `kamon-http4s-1_0` = project
   .settings(
     shared,
     name := "kamon-http4s-1.0",
-    libraryDependencies ++= http4sDeps("1.0.0-M24")
+    libraryDependencies ++= http4sDeps("1.0.0-M38")
   )
 
 lazy val root = project
