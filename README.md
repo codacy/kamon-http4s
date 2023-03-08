@@ -41,7 +41,7 @@ def serve[F[_]](implicit Effect: Effect[F], EC: ExecutionContext) : Stream[F, St
       _ <- Stream.eval(Sync[F].delay(println("Starting Google Service with Client")))
       client <- Http1Client.stream[F]()
       service = GoogleService.service[F](middleware.client.KamonSupport(client)) (1)
-      exitCode <- EmberBuilder[F]
+      exitCode <- BlazeBuilder[F]
         .bindHttp(Config.server.port, Config.server.interface)
         .mountService(middleware.server.KamonSupport(service)) (2)
         .serve
