@@ -32,9 +32,11 @@ import org.http4s.implicits._
 import org.http4s.server.Server
 import org.scalatest.concurrent.Eventually
 import org.scalatest.time.SpanSugar
-import org.scalatest.{Matchers, OptionValues, WordSpec}
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.OptionValues
+import org.scalatest.matchers.should.Matchers
 
-class HttpMetricsSpec extends WordSpec
+class HttpMetricsSpec extends AnyWordSpec
   with Matchers
   with Eventually
   with SpanSugar

@@ -13,7 +13,7 @@
  * =========================================================================================
  */
 
-val kamonVersion = "2.6.0"
+val kamonVersion = "2.7.2"
 
 val kamonCore    = "io.kamon" %% "kamon-core"                   % kamonVersion
 val kamonTestkit = "io.kamon" %% "kamon-testkit"                % kamonVersion
@@ -21,7 +21,7 @@ val kamonCommon  = "io.kamon" %% "kamon-instrumentation-common" % kamonVersion
 
 // copy pasted from https://github.com/kamon-io/kamon-sbt-umbrella
 val logbackClassic = "ch.qos.logback"   %  "logback-classic" % "1.2.3"
-val scalatest      = "org.scalatest"    %% "scalatest"       % "3.0.9"
+val scalatest      = "org.scalatest"    %% "scalatest"       % "3.2.18"
 def compileScope(deps: ModuleID*): Seq[ModuleID]  = deps map (_ % "compile")
 def testScope(deps: ModuleID*): Seq[ModuleID]     = deps map (_ % "test")
 // end copy pasted section
@@ -43,6 +43,12 @@ lazy val shared = Seq(
     case Some((2, 12)) => Seq("-Ypartial-unification", "-language:higherKinds")
     case _             => "-language:higherKinds" :: Nil
   }),
+  scalacOptions ~= { options =>
+    options.filter(_ match {
+      case "-Ywarn-dead-code" | "-Xlint" => false
+      case _ => true
+    })
+  },
   libraryDependencies ++=
     compileScope(kamonCore, kamonCommon) ++
       testScope(scalatest, kamonTestkit, logbackClassic),
@@ -58,7 +64,7 @@ lazy val `kamon-http4s-0_23` = project
   .in(file("modules/0.23"))
   .settings(
     shared,
-    crossScalaVersions := Seq("2.12.17", "2.13.10"),
+    crossScalaVersions := Seq("2.12.17", "2.13.10", "3.3.3"),
     name := "kamon-http4s-0.23",
     libraryDependencies ++= http4sDeps("0.23.18")
   )

@@ -29,11 +29,13 @@ import org.http4s.implicits._
 import org.http4s.{HttpRoutes, Response}
 import org.scalatest.concurrent.Eventually
 import org.scalatest.time.SpanSugar
-import org.scalatest.{BeforeAndAfterAll, Matchers, OptionValues, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.{BeforeAndAfterAll, OptionValues}
 
 import java.net.ConnectException
 
-class ClientInstrumentationSpec extends WordSpec
+class ClientInstrumentationSpec extends AnyWordSpec
   with Matchers
   with Eventually
   with SpanSugar
@@ -59,7 +61,7 @@ class ClientInstrumentationSpec extends WordSpec
         client.expect[String]("/tracing/ok").unsafeRunSync() shouldBe "ok"
       }
 
-      eventually(timeout(3 seconds)) {
+      eventually(timeout(3.seconds)) {
         val span = testSpanReporter().nextSpan().value
 
         span.operationName shouldBe "/tracing/ok"
@@ -85,7 +87,7 @@ class ClientInstrumentationSpec extends WordSpec
         }
       }
 
-      eventually(timeout(3 seconds)) {
+      eventually(timeout(3.seconds)) {
         val span = testSpanReporter().nextSpan().value
         span.operationName shouldBe "/tracing/ok"
         span.kind shouldBe Span.Kind.Client
@@ -104,7 +106,7 @@ class ClientInstrumentationSpec extends WordSpec
         client.expect[String]("/tracing/not-found").attempt.unsafeRunSync().isLeft shouldBe true
       }
 
-      eventually(timeout(3 seconds)) {
+      eventually(timeout(3.seconds)) {
         val span = testSpanReporter().nextSpan().value
         span.operationName shouldBe "/tracing/not-found"
         span.kind shouldBe Span.Kind.Client
@@ -126,7 +128,7 @@ class ClientInstrumentationSpec extends WordSpec
         client.expect[String]("/tracing/error").attempt.unsafeRunSync().isLeft shouldBe true
       }
 
-      eventually(timeout(3 seconds)) {
+      eventually(timeout(3.seconds)) {
         val span = testSpanReporter().nextSpan().value
 
         span.operationName shouldBe "/tracing/error"
