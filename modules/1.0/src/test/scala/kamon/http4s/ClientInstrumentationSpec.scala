@@ -29,11 +29,13 @@ import org.http4s.implicits._
 import org.http4s.{HttpRoutes, Response}
 import org.scalatest.concurrent.Eventually
 import org.scalatest.time.SpanSugar
-import org.scalatest.{BeforeAndAfterAll, Matchers, OptionValues, WordSpec}
+import org.scalatest.{BeforeAndAfterAll, OptionValues}
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 
 import java.net.ConnectException
 
-class ClientInstrumentationSpec extends WordSpec
+class ClientInstrumentationSpec extends AnyWordSpec
   with Matchers
   with Eventually
   with SpanSugar

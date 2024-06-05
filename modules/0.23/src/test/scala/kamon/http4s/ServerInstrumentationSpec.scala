@@ -34,10 +34,12 @@ import org.http4s.server.Server
 import org.http4s.{Headers, HttpRoutes}
 import org.scalatest.concurrent.Eventually
 import org.scalatest.time.SpanSugar
-import org.scalatest.{BeforeAndAfterAll, Matchers, OptionValues, WordSpec}
+import org.scalatest.{BeforeAndAfterAll, OptionValues}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import org.typelevel.ci.CIString
 
-class ServerInstrumentationSpec extends WordSpec
+class ServerInstrumentationSpec extends AnyWordSpec
   with Matchers
   with Eventually
   with SpanSugar
