@@ -21,6 +21,7 @@ workflows:
                 name: Run tests
                 command: sbt +test
           setup_remote_docker: false
+          use_sbt_native_client: false
           context: CodacyAWS
           requires:
             - codacy/checkout_and_version
@@ -37,6 +38,7 @@ workflows:
                 name: Release bundle to Sonatype
                 command: sbt sonatypeBundleRelease
           setup_remote_docker: false
+          use_sbt_native_client: false
           context: CodacyAWS
           requires:
             - compile_and_test
