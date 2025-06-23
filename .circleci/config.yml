@@ -20,7 +20,6 @@ workflows:
             - run:
                 name: Run tests
                 command: sbt +test
-          setup_remote_docker: false
           use_sbt_native_client: false
           context: CodacyAWS
           requires:
