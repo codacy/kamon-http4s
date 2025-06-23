@@ -27,7 +27,6 @@ workflows:
       - codacy/sbt:
           name: publish
           cmd: sbt retrieveGPGKeys crossPublishSigned sonatypeCentralRelease
-          setup_remote_docker: false
           use_sbt_native_client: false
           context: CodacyAWS
           requires:
