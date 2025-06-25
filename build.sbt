@@ -39,6 +39,7 @@ lazy val shared = Seq(
   
   moduleName := name.value,
   publishTo := sonatypePublishToBundle.value,
+  sonatypeCredentialHost := "central.sonatype.com",
   scalacOptions ++= (CrossVersion.partialVersion(scalaVersion.value) match {
     case Some((2, 12)) => Seq("-Ypartial-unification", "-language:higherKinds")
     case _             => "-language:higherKinds" :: Nil

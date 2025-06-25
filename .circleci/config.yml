@@ -26,7 +26,7 @@ workflows:
             - codacy/checkout_and_version
       - codacy/sbt:
           name: publish
-          cmd: sbt retrieveGPGKeys crossPublishSigned sonatypeCentralRelease
+          cmd: sbt "retrieveGPGKeys; crossPublishSigned; sonatypeCentralRelease"
           use_sbt_native_client: false
           context: CodacyAWS
           requires:
