@@ -29,6 +29,7 @@ workflows:
           cmd: sbt "retrieveGPGKeys; +publishSigned; sonatypeCentralRelease"
           use_sbt_native_client: false
           context: CodacyAWS
+          no_output_timeout: "30m"
           requires:
             - compile_and_test
           filters:
