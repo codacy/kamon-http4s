@@ -26,7 +26,7 @@ workflows:
             - codacy/checkout_and_version
       - codacy/sbt:
           name: publish
-          cmd: sbt "retrieveGPGKeys; +publishSigned; sonatypeCentralRelease"
+          cmd: sbt +publish
           use_sbt_native_client: false
           context: CodacyAWS
           no_output_timeout: "30m"

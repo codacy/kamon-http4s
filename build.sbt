@@ -59,7 +59,7 @@ lazy val shared = Seq(
   ),
   // this setting is not picked up properly from the plugin
   pgpPassphrase := Option(System.getenv("SONATYPE_GPG_PASSPHRASE")).map(_.toCharArray)
-) ++ publicMvnPublish
+) ++ privateMvnPublish
 
 lazy val `kamon-http4s-0_23` = project
   .in(file("modules/0.23"))
