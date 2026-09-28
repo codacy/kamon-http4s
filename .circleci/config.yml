@@ -26,6 +26,7 @@ workflows:
             - codacy/checkout_and_version
       - codacy/sbt:
           name: publish
+          aws_profile: maven
           cmd: sbt +publish
           use_sbt_native_client: false
           context: CodacyAWS
